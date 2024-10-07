@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Header() {
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -9,10 +10,8 @@ export default function Header() {
     return ( 
         <header className="flex justify-center">
             <nav>
-                <div className="container mx-auto flex justify-between items-center py-3 text-secondary">
-                    <a className="navbar-brand" href="/">
-                    <img src="src/assets/anycart.svg" alt="AnyCart logo" className="my-3" />
-                    </a>
+                <div className="container flex py-3 text-secondary">
+                    <Link to="/"><img src="src/assets/anycart.svg" alt="AnyCart logo" className="mx-3"/></Link>
                     <button
                     className="navbar-toggler focus:outline-none lg:hidden"
                     type="button"
@@ -22,14 +21,10 @@ export default function Header() {
                     <span className="ms-3">☰</span>
                     </button>
                     <div className={`lg:flex lg:items-center lg:space-x-8 ${isMenuOpen ? 'flex' : 'hidden'} flex-col lg:flex-row text-secondary`}>
-                    <ul className="flex flex-col lg:flex-row lg:space-x-8 mb-4 lg:mb-0">
-                        <li className="nav-item">
-                        <a className="uppercase text-lg font-bold" aria-current="page" href="/">Home</a>
-                        </li>
-                        <li className="nav-item">
-                        <a className="uppercase text-lg font-bold" href="/">Contact</a>
-                        </li>
-                    </ul>
+                    <div className="flex flex-col lg:flex-row lg:space-x-8 mb-4 lg:mb-0">
+                        <Link to="/">Home</Link>
+                        <Link to="/contact">Contact</Link>
+                    </div>
                     </div>
                 </div>
             </nav>

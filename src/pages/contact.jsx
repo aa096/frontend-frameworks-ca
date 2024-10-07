@@ -1,11 +1,10 @@
-import { Header, Footer } from "../components";
 
 function Contact() {
     return (
         <div>
-            <Header />
+            {/* <Header /> */}
             <main></main>
-            <Footer />
+            {/* <Footer /> */}
         </div>
     );
 }
