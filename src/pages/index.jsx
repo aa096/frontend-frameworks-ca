@@ -1,6 +1,10 @@
-import { App } from "./App";
+import App from "./App";
+import Contact from "./contact"
 
 export {
-    App
+    App, Contact
 }
+
+
+
 
