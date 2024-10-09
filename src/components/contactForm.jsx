@@ -59,43 +59,44 @@ function ContactForm() {
 	}
 
 	return (
-		<div className="flex mt-4 justify-center">
-			<form className="bg-white p-8 flex justify-center" onSubmit={handleSubmit(onSubmit)}>
-				<fieldset disabled={isLoading}>
-					{error && <ServerWarning>{error}</ServerWarning>}
-					<div className="form-control w-full max-w-md mx-auto">
-						<label className="label">
-							<span className="label-text me-3">Full Name:</span>
-						</label>
-						<input className="p-2 bg-secondary rounded-md" {...register("Full Name")}type="name"/>
-					</div>
+        <div className="flex mt-4 justify-center">
+            <form className="bg-white p-8 flex justify-center" onSubmit={handleSubmit(onSubmit)}>
+                <fieldset disabled={isLoading}>
+                    {error && <ServerWarning>{error}</ServerWarning>}
+                    <div className="form-control w-full max-w-md mx-auto">
+                        <label className="label">
+                            <span className="label-text text-center w-full">Full Name:</span>
+                        </label>
+                        <input className="p-2 bg-secondary text-white rounded-md w-full mt-2" {...register("fullName")} type="text" />
+                    </div>
                     <div className="form-control w-full max-w-md mx-auto mt-3">
-						<label className="label">
-							<span className="label-text me-8">Email:</span>
-						</label>
-						<input className="p-2 bg-secondary rounded-md" {...register("email")} />
-					</div>
-					<div className="form-control w-full max-w-md mx-auto mt-3">
-						<label className="label">
-							<span className="label-text me-3">Subject:</span>
-						</label>
-						<input className="p-2 bg-secondary rounded-md" {...register("password")} type="password" />
-					</div>
+                        <label className="label">
+                            <span className="label-text text-center w-full">Email:</span>
+                        </label>
+                        <input className="p-2 bg-secondary text-white rounded-md w-full mt-2" {...register("email")} type="email" />
+                    </div>
                     <div className="form-control w-full max-w-md mx-auto mt-3">
-						<label className="label">
-							<span className="label-text me-3 ">Message</span>
-						</label>
-						<textarea className="p-2 bg-secondary rounded-md" {...register("password")} type="password" />
-					</div>
-					<div className="form-control w-full max-w-md mx-auto">
-						<button className="bg-primary hover:bg-primary mt-2 text-white font-bold py-2 px-4 rounded-md">
-							{isLoading ? "Logging in..." : "Send Message"}
-						</button>
-					</div>
-				</fieldset>
-			</form>
-		</div>
-	);
+                        <label className="label">
+                            <span className="label-text text-center w-full">Subject:</span>
+                        </label>
+                        <input className="p-2 bg-secondary text-white rounded-md w-full mt-2" {...register("subject")} type="text" />
+                    </div>
+                    <div className="form-control w-full max-w-md mx-auto mt-3">
+                        <label className="label">
+                            <span className="label-text text-center w-full">Message:</span>
+                        </label>
+                        <textarea className="p-2 bg-secondary text-white rounded-md w-full mt-2" {...register("message")} rows="5" />
+                    </div>
+                    <div className="form-control w-full max-w-md mx-auto">
+                        <button className="bg-primary hover:bg-primary mt-2 text-white font-bold py-2 px-4 rounded-md w-full">
+                            {isLoading ? "Sending..." : "Send Message"}
+                        </button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    );
+    
 }
 
 export default ContactForm;
