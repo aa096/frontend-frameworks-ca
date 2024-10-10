@@ -1,102 +1,113 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 import schema from "../validation/formSchema.jsx";
 
-// console.log(useUserActions);
-
 function ContactForm() {
-	// const [data, setData] = useState([]);
-	const [isLoading, setIsLoading] = useState(false);
-	const [error, setError] = useState(null);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
 
-	// const { setUser } = useUserActions();
+  const onSubmit = (data) => {
+    console.log(data);
+  };
 
-	const navigate = useNavigate();
+  return (
+    <div className="flex mt-4 justify-center">
+      <form
+        className="bg-white p-8 flex justify-center"
+        onSubmit={handleSubmit((data) => {
+          onSubmit(data);
+        })}
+      >
+        <fieldset>
+          <div className="form-control w-full max-w-md mx-auto">
+            <label className="label">
+              <span className="label-text text-center w-full">Full Name:</span>
+            </label>
+            <input
+              className="p-2 bg-secondary text-white rounded-md w-full mt-2"
+              {...register("fullName", {
+                required: "Full name is required",
+                minLength: {
+                  value: 3,
+                  message: "Full name must be at least 3 characters",
+                },
+              })}
+              type="text"
+            />
+            {errors.fullName && <span>{errors.fullName.message}</span>}
+          </div>
 
-	// console.log(setUser);
+          <div className="form-control w-full max-w-md mx-auto mt-3">
+            <label className="label">
+              <span className="label-text text-center w-full">Email:</span>
+            </label>
+            <input
+              className="p-2 bg-secondary text-white rounded-md w-full mt-2"
+              {...register("email", {
+                required: "Email is required",
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: "Invalid email address",
+                },
+              })}
+              type="email"
+            />
+            {errors.email && <span>{errors.email.message}</span>}
+          </div>
 
-	const {
-		register,
-		handleSubmit,
-		formState: { errors },
-	} = useForm({
-		resolver: yupResolver(schema),
-	});
+          <div className="form-control w-full max-w-md mx-auto mt-3">
+            <label className="label">
+              <span className="label-text text-center w-full">Subject:</span>
+            </label>
+            <input
+              className="p-2 bg-secondary text-white rounded-md w-full mt-2"
+              {...register("subject", {
+                required: "Subject is required",
+                minLength: {
+                  value: 3,
+                  message: "Subject must be at least 3 characters",
+                },
+              })}
+              type="text"
+            />
+            {errors.subject && <span>{errors.subject.message}</span>}
+          </div>
 
-	console.log(errors);
+          <div className="form-control w-full max-w-md mx-auto mt-3">
+            <label className="label">
+              <span className="label-text text-center w-full">Message:</span>
+            </label>
+            <textarea
+              className="p-2 bg-secondary text-white rounded-md w-full mt-2"
+              {...register("body", {
+                required: "Message is required",
+                minLength: {
+                  value: 3,
+                  body: "Message must be at least 3 characters",
+                },
+              })}
+              rows="5"
+            />
+            {errors.body && <span>{errors.body.message}</span>}
+          </div>
 
-	async function onSubmit(data) {
-		console.log(data);
-
-		const options = {
-			headers: { "Content-Type": "application/json" },
-			method: "POST",
-			body: JSON.stringify(data),
-		};
-
-		try {
-			setIsLoading(true);
-			setError(null);
-			const response = await fetch(LOGIN_URL, options);
-			const json = await response.json();
-
-			if (!response.ok) {
-				return setError(json.errors?.[0]?.message ?? "There was an error");
-			}
-
-			// setUser(json);
-			// navigate("/dashboard");
-
-			// store user in global state
-			/// redirect to dahsboard
-		} catch (error) {
-			setError(error.toString());
-		} finally {
-			setIsLoading(false);
-		}
-	}
-
-	return (
-        <div className="flex mt-4 justify-center">
-            <form className="bg-white p-8 flex justify-center" onSubmit={handleSubmit(onSubmit)}>
-                <fieldset disabled={isLoading}>
-                    {error && <ServerWarning>{error}</ServerWarning>}
-                    <div className="form-control w-full max-w-md mx-auto">
-                        <label className="label">
-                            <span className="label-text text-center w-full">Full Name:</span>
-                        </label>
-                        <input className="p-2 bg-secondary text-white rounded-md w-full mt-2" {...register("fullName")} type="text" />
-                    </div>
-                    <div className="form-control w-full max-w-md mx-auto mt-3">
-                        <label className="label">
-                            <span className="label-text text-center w-full">Email:</span>
-                        </label>
-                        <input className="p-2 bg-secondary text-white rounded-md w-full mt-2" {...register("email")} type="email" />
-                    </div>
-                    <div className="form-control w-full max-w-md mx-auto mt-3">
-                        <label className="label">
-                            <span className="label-text text-center w-full">Subject:</span>
-                        </label>
-                        <input className="p-2 bg-secondary text-white rounded-md w-full mt-2" {...register("subject")} type="text" />
-                    </div>
-                    <div className="form-control w-full max-w-md mx-auto mt-3">
-                        <label className="label">
-                            <span className="label-text text-center w-full">Message:</span>
-                        </label>
-                        <textarea className="p-2 bg-secondary text-white rounded-md w-full mt-2" {...register("message")} rows="5" />
-                    </div>
-                    <div className="form-control w-full max-w-md mx-auto">
-                        <button className="bg-primary hover:bg-primary mt-2 text-white font-bold py-2 px-4 rounded-md w-full">
-                            {isLoading ? "Sending..." : "Send Message"}
-                        </button>
-                    </div>
-                </fieldset>
-            </form>
-        </div>
-    );
-    
+          <div className="form-control w-full max-w-md mx-auto">
+            <button
+              type="submit"
+              className="bg-primary hover:bg-primary mt-2 text-white font-bold py-2 px-4 rounded-md w-full"
+            >
+              Send Message
+            </button>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  );
 }
 
 export default ContactForm;
