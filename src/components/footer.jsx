@@ -1,5 +1,9 @@
 import ScrollToTopButton from "./scrollUpButton";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFacebook } from "@fortawesome/free-brands-svg-icons";
+import { faInstagram } from "@fortawesome/free-brands-svg-icons";
+import { faTiktok } from "@fortawesome/free-brands-svg-icons";
 
 export default function Footer() {
     return (
@@ -16,6 +20,13 @@ export default function Footer() {
                   Contact us
                 </Link>
             </nav>
+            <div className="text-[25px] hover:text-secondary mt-3">
+            <FontAwesomeIcon icon={faFacebook} />
+            <FontAwesomeIcon icon={faInstagram} 
+            className="ms-3 text-[27px]"/>
+            <FontAwesomeIcon icon={faTiktok} className="ms-3"/>
+
+            </div>
           </div>
         </footer>
       </>
