@@ -10,6 +10,7 @@ const GlobalStyle = createGlobalStyle`
         --color-primary: #83ABB3;
         --color-secondary: #766960;
         height: 100%;
+        margin: 0;
         font-family: "Garet", sans-serif;
      }
      body {
@@ -17,6 +18,7 @@ const GlobalStyle = createGlobalStyle`
         background: #EFECE7;
         font-family: "Garet", sans-serif;
         color: var(--color-secondary);
+        margin: 0;
      }
 `;
 
