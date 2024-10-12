@@ -26,7 +26,7 @@ export default function Header() {
           <div className="flex justify-between items-center max-w-screen-xl relative">
             <div className="flex items-center">
               <Link to="/">
-                <img src="src/assets/anycart.svg" alt="AnyCart logo" className="me-10" />
+                <img src="../public/assets/anycart.svg" alt="AnyCart logo" className="me-10" />
               </Link>
               <div className="hidden lg:flex lg:items-center lg:space-x-8 text-secondary">
                 <div className="uppercase font-bold mt-4">
