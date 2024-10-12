@@ -1,12 +1,12 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
-import { useCart } from './templates/cartContent';
+import { useCartContext } from './templates/cartContent';
 
 export default function Header() {
   const [isMenuOpen, setMenuOpen] = useState(false);
-  const { cartItemCount } = useCart(); // Get cartItemCount from context
+  const { cartItemCount } = useCartContext(); // Use context
 
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
@@ -60,7 +60,36 @@ export default function Header() {
             </div>
           </div>
 
-          {/* Mobile menu code remains unchanged */}
+          <div
+            className={`lg:hidden flex-col items-center ${
+              isMenuOpen ? 'flex' : 'hidden'
+            } flex-col lg:flex-row text-secondary mt-4 absolute bg-white w-full left-0 top-12 z-20`}
+          >
+            <button
+              className="absolute top-0 right-5 text-[40px] hover:text-primary transition-colors duration-200"
+              onClick={closeMenu}
+              aria-label="Close menu"
+            >
+              &times;
+            </button>
+            <div className="uppercase font-bold p-4 hover:text-primary transition-colors duration-200">
+              <Link to="/" onClick={closeMenu}>
+                Home
+              </Link>
+            </div>
+            <div className="uppercase font-bold p-4 hover:text-primary transition-colors duration-200">
+              <Link to="/contact" onClick={closeMenu}>
+                Contact
+              </Link>
+            </div>
+          </div>
+
+          {isMenuOpen && (
+            <div
+              className="lg:hidden absolute top-0 left-0 w-full h-full z-10 backdrop-blur-sm"
+              onClick={closeMenu}
+            ></div>
+          )}
         </nav>
       </header>
     </>
