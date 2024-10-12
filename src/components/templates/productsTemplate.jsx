@@ -35,7 +35,7 @@ export function ListingItem({ item }) {
             </a>
             <a 
                 href={`/product/?id=${item.id}`} 
-                className="mt-4 inline-block bg-primary text-white font-bold py-2 px-4 rounded transition duration-300 hover:bg-primary-dark"
+                className="mt-4 inline-block bg-primary text-white font-bold py-2 px-4 rounded transition duration-300 hover:bg-secondary"
             >
                 View Product
             </a>
