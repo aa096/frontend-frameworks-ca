@@ -38,12 +38,11 @@ export function ListingItem({ item }) {
                 <p className="text-secondary mb-3">{`Rating: ${item.rating} / 5`}</p>
                 <p className="text-secondary mb-4">{item.description}</p>
             </Link>
-            <a 
-                href={`/product/?id=${item.id}`} 
+            <Link to={`/product/${item.id}`} 
                 className="mt-4 inline-block bg-primary text-white font-bold py-2 px-4 rounded transition duration-300 hover:bg-secondary"
             >
                 View Product
-            </a>
+            </Link>
         </div>
     );
 }
@@ -67,7 +66,6 @@ const SearchBar = ({ items, setFilteredItems }) => {
         const value = event.target.value;
         setSearchTerm(value);
 
-        // Filter items based on the search term
         const filtered = items.filter(item =>
             item.title.toLowerCase().includes(value.toLowerCase())
         );

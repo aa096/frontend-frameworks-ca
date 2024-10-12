@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 
 export default function Header() {
   const [isMenuOpen, setMenuOpen] = useState(false);
+  const [cartItemCount, setCartItemCount] = useState(0);
 
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
@@ -13,6 +14,17 @@ export default function Header() {
   const closeMenu = () => {
     setMenuOpen(false);
   };
+
+  // Function to update cart item count from localStorage
+  const updateCartItemCount = () => {
+    const existingCart = JSON.parse(localStorage.getItem('cart')) || [];
+    setCartItemCount(existingCart.length);
+  };
+
+  // Update cart item count on component mount
+  useEffect(() => {
+    updateCartItemCount();
+  }, []);
 
   return (
     <>
@@ -35,17 +47,27 @@ export default function Header() {
                 </div>
               </div>
             </div>
-            <Link to="/cart" className="text-[20px] ml-auto hover:text-primary">
-              <FontAwesomeIcon icon={faCartShopping} className='mt-5'/>
-            </Link>
-            <button
-              className="navbar-toggler focus:outline-none lg:hidden mt-2"
-              type="button"
-              onClick={toggleMenu}
-              aria-label="Toggle navigation"
-            >
-              <span className="text-[30px] ms-4 hover:text-primary">☰</span>
-            </button>
+
+            <div className="flex items-center">
+              <div className="relative">
+                <Link to="/cart" className="text-[20px] ml-auto hover:text-primary">
+                  <FontAwesomeIcon icon={faCartShopping} className='mt-5' />
+                </Link>
+                {cartItemCount > 0 && (
+                  <span className="absolute top-0.5 -right-2 bg-primary text-white hover:bg-secondary text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                    {cartItemCount}
+                  </span>
+                )}
+              </div>
+              <button
+                className="navbar-toggler focus:outline-none lg:hidden mt-2 ml-4"
+                type="button"
+                onClick={toggleMenu}
+                aria-label="Toggle navigation"
+              >
+                <span className="text-[30px] hover:text-primary">☰</span>
+              </button>
+            </div>
           </div>
 
           <div
