@@ -3,7 +3,7 @@ import { createGlobalStyle } from "styled-components";
 const GlobalStyle = createGlobalStyle`
     @font-face {
         font-family: "Garet";
-        src: url("../public/assets/fonts/Garet-Book.ttf") format('truetype');
+        src: url("../../public/assets/fonts/Garet-Book.ttf") format('truetype');
     }
 
      html {
