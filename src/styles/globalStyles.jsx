@@ -1,9 +1,10 @@
 import { createGlobalStyle } from "styled-components";
+import garetBookFont from "../assets/fonts/garetbook.ttf"
 
 const GlobalStyle = createGlobalStyle`
     @font-face {
         font-family: "Garet";
-        src: url("../../public/assets/fonts/garetbook.ttf") format('truetype');
+        src: url(${garetBookFont}) format('truetype');
     }
 
      html {
