@@ -18,7 +18,7 @@ export default function Header() {
         <p className="text-sm">📦 Free returns within 30 days on all orders!</p>
       </div>
       <header className="w-screen">
-        <nav className="container mx-auto py-3 text-secondary">
+        <nav className="mx-10 py-3 text-secondary">
           <div className="flex justify-center items-center max-w-screen-xl">
             <div>
               <Link to="/">
