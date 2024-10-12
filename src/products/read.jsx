@@ -25,3 +25,25 @@ export async function getProducts() {
         return [];
     }
 }
+
+export async function getProduct(id) {
+    try {
+        if (!id) {
+            throw new Error("Get requires an ID");
+        }
+
+        const getProductURL = `${SHOP_URL}/${id}`;
+        const response = await fetch(getProductURL);
+        
+        // Ensure that the API returns the correct format (check if it has a 'data' field)
+        const data = await response.json();
+
+        if (!data || !data.data) {
+            throw new Error("Invalid response format");
+        }
+
+        return data; // Return the full object so you can access `data.data`
+    } catch (error) {
+        throw error;
+    }
+}

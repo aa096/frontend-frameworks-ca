@@ -1,7 +1,11 @@
+import { ProductPage } from "../components/templates";
+
 function Product() {
     return (
-      <div id="mainContainer" className="container mx-0">
-        <main></main>
+      <div>
+        <main>
+            <ProductPage />
+        </main>
       </div>
     );
   }

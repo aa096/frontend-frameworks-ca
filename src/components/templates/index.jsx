@@ -1,5 +1,6 @@
 import { ProductsTemplate } from "./productsTemplate";
+import ProductPage from "./productDetail";
 
 export  {
-    ProductsTemplate
+    ProductsTemplate, ProductPage
 }
