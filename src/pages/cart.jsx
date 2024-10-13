@@ -1,7 +1,11 @@
+import CartPage from "../components/templates/carTemplate";
+
 function Cart() {
     return (
-      <div id="mainContainer" className="container mx-0">
-        <main></main>
+      <div>
+        <main>
+            <CartPage />
+        </main>
       </div>
     );
   }

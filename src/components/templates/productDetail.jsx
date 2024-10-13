@@ -7,7 +7,7 @@ function ProductPage() {
     const { productId } = useParams();
     const [product, setProduct] = useState(null);
     const [error, setError] = useState(null);
-    const { updateCartItemCount } = useCartContext(); // Get the function from context
+    const { updateCartItemCount } = useCartContext(); 
 
     useEffect(() => {
         if (!productId) {
@@ -30,11 +30,26 @@ function ProductPage() {
     const handleAddToCart = () => {
         if (product) {
             const existingCart = JSON.parse(localStorage.getItem('cart')) || [];
-            existingCart.push(product);
+    
+            // Check if the product is already in the cart
+            const existingProductIndex = existingCart.findIndex(cartItem => cartItem.id === product.id);
+    
+            if (existingProductIndex !== -1) {
+                // If product is already in the cart, increment its quantity
+                existingCart[existingProductIndex].quantity += 1;
+            } else {
+                // If product is not in the cart, add it with an initial quantity of 1
+                existingCart.push({ ...product, quantity: 1 });
+            }
+    
+            // Update the cart in localStorage
             localStorage.setItem('cart', JSON.stringify(existingCart));
-            updateCartItemCount(); // Update cart item count in header
+            
+            // Update the cart item count
+            updateCartItemCount(); 
         }
     };
+    
 
     if (error) return <div>{error}</div>;
     if (!product) return <div>Loading...</div>;
