@@ -64,8 +64,9 @@ export default function CartPage() {
   const handleCheckout = () => {
     localStorage.removeItem('cart');
     setCart([]);
+    updateCartItemCount(); 
     navigate('/checkout-success', { state: { cartItems: cart } }); 
-  };
+};
 
   if (cart.length === 0) {
     return <div className="text-center">Your cart is empty.</div>;
