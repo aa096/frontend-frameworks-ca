@@ -1,13 +1,14 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getProduct } from '../../products/read';
 import { useCartContext } from './cartContent';
+import { Helmet } from 'react-helmet';
 
 function ProductPage() {
     const { productId } = useParams();
     const [product, setProduct] = useState(null);
     const [error, setError] = useState(null);
-    const { updateCartItemCount } = useCartContext(); 
+    const { updateCartItemCount } = useCartContext();
 
     useEffect(() => {
         if (!productId) {
@@ -30,26 +31,19 @@ function ProductPage() {
     const handleAddToCart = () => {
         if (product) {
             const existingCart = JSON.parse(localStorage.getItem('cart')) || [];
-    
-            // Check if the product is already in the cart
+
             const existingProductIndex = existingCart.findIndex(cartItem => cartItem.id === product.id);
-    
+
             if (existingProductIndex !== -1) {
-                // If product is already in the cart, increment its quantity
                 existingCart[existingProductIndex].quantity += 1;
             } else {
-                // If product is not in the cart, add it with an initial quantity of 1
                 existingCart.push({ ...product, quantity: 1 });
             }
-    
-            // Update the cart in localStorage
+
             localStorage.setItem('cart', JSON.stringify(existingCart));
-            
-            // Update the cart item count
-            updateCartItemCount(); 
+            updateCartItemCount();
         }
     };
-    
 
     if (error) return <div>{error}</div>;
     if (!product) return <div>Loading...</div>;
@@ -61,6 +55,10 @@ function ProductPage() {
 
     return (
         <div className="container mx-auto bg-white shadow-lg mb-4 pb-4 text-secondary">
+            <Helmet>
+                <title>{product.title} - AnyCart</title>
+                <meta name="description" content={`Discover ${product.title} at AnyCart. Explore features, pricing, and get the best deals on your favorite products. Shop now and enjoy great savings!`} />
+            </Helmet>
             <h1 className="text-primary text-[25px] font-bold uppercase text-center pt-9 my-6">{product.title}</h1>
             <div className="flex flex-col items-center md:flex-row md:justify-center mx-3">
                 <div className="relative mb-5 md:mb-0">
