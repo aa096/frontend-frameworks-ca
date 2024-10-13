@@ -14,6 +14,7 @@ const GlobalStyle = createGlobalStyle`
         margin: 0;
         font-family: "Garet", sans-serif;
      }
+     
      body {
         height: 100%;
         background: #EFECE7;
@@ -21,6 +22,15 @@ const GlobalStyle = createGlobalStyle`
         color: var(--color-secondary);
         margin: 0;
      }
+
+     main {
+         display: flex;
+         flex-grow: 1;
+     }
+
+     footer {
+         margin-top: auto; 
+      }
 `;
 
 

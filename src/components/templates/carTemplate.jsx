@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { useCartContext } from './cartContent';
 import { useNavigate } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
 
 export default function CartPage() {
   const navigate = useNavigate(); 
@@ -69,8 +72,20 @@ export default function CartPage() {
 };
 
   if (cart.length === 0) {
-    return <div className="text-center">Your cart is empty.</div>;
-  }
+    return (
+        <div className="flex justify-center mx-auto mt-20">
+            <div className="text-center">
+                <FontAwesomeIcon icon={faCartShopping} className='text-[23px]'/>
+                <p>Your cart is empty.</p>
+                <div className='mt-5'>
+                    <Link to="/" className="bg-primary text-white px-4 py-1.5 rounded mt-4">
+                        <FontAwesomeIcon icon={faArrowLeft} /> Continue Shopping
+                    </Link>
+                </div>
+            </div>
+        </div>
+    );
+}
 
   return (
     <div className="container mx-auto my-8 p-4 bg-white shadow-lg">
