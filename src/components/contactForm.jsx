@@ -1,12 +1,12 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useState } from "react"; // Import useState
+import { useState } from "react"; 
 import schema from "../validation/formSchema.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 function ContactForm() {
-  const [formSubmitted, setFormSubmitted] = useState(false); // State to track form submission
+  const [formSubmitted, setFormSubmitted] = useState(false); 
 
   const {
     register,
