@@ -6,7 +6,8 @@ const schema = Yup.object().shape({
     .min(3, 'Full name must be at least 3 characters'), 
   email: Yup.string()
     .required('Email is required')
-    .email('Invalid email address'),
+    .email('Invalid email address')
+    .matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i, 'Invalid email format'),
   subject: Yup.string()
     .required('Subject is required')
     .min(3, 'Subject must be at least 3 characters'),
