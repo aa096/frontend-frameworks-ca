@@ -4,7 +4,10 @@ import CheckoutSuccess from "./checkoutSuccessTemp";
 import { useCartContext } from "./cartContent";
 import CartPage from "./cartTemplate";
 
-
-export  {
-    ProductsTemplate, ProductPage, CheckoutSuccess, useCartContext, CartPage
-}
+export {
+  ProductsTemplate,
+  ProductPage,
+  CheckoutSuccess,
+  useCartContext,
+  CartPage,
+};

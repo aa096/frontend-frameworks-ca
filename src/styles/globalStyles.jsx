@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-import garetBookFont from "../assets/fonts/garetbook.ttf"
+import garetBookFont from "../assets/fonts/garetbook.ttf";
 
 const GlobalStyle = createGlobalStyle`
     @font-face {
@@ -32,6 +32,5 @@ const GlobalStyle = createGlobalStyle`
          margin-top: auto; 
       }
 `;
-
 
 export default GlobalStyle;

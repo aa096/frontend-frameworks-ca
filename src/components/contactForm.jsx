@@ -1,12 +1,12 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useState } from "react"; 
+import { useState } from "react";
 import schema from "../validation/formSchema.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 function ContactForm() {
-  const [formSubmitted, setFormSubmitted] = useState(false); 
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   const {
     register,
@@ -18,7 +18,7 @@ function ContactForm() {
 
   const onSubmit = (data) => {
     console.log(data);
-    setFormSubmitted(true); 
+    setFormSubmitted(true);
   };
 
   return (
@@ -40,7 +40,9 @@ function ContactForm() {
           <fieldset>
             <div className="form-control w-full">
               <label className="label">
-                <span className="label-text text-center w-full font-bold">Full Name:</span>
+                <span className="label-text text-center w-full font-bold">
+                  Full Name:
+                </span>
               </label>
               <input
                 className="p-2 bg-secondary text-white rounded-md w-full mt-2"
@@ -52,7 +54,9 @@ function ContactForm() {
 
             <div className="form-control w-full mt-3">
               <label className="label">
-                <span className="label-text text-center w-full font-bold">Email:</span>
+                <span className="label-text text-center w-full font-bold">
+                  Email:
+                </span>
               </label>
               <input
                 className="p-2 bg-secondary text-white rounded-md w-full mt-2"
@@ -64,7 +68,9 @@ function ContactForm() {
 
             <div className="form-control w-full mt-3">
               <label className="label">
-                <span className="label-text text-center w-full font-bold">Subject:</span>
+                <span className="label-text text-center w-full font-bold">
+                  Subject:
+                </span>
               </label>
               <input
                 className="p-2 bg-secondary text-white rounded-md w-full mt-2"
@@ -76,7 +82,9 @@ function ContactForm() {
 
             <div className="form-control w-full mt-3">
               <label className="label">
-                <span className="label-text text-center w-full font-bold">Message:</span>
+                <span className="label-text text-center w-full font-bold">
+                  Message:
+                </span>
               </label>
               <textarea
                 className="p-2 bg-secondary text-white rounded-md w-full mt-2"
