@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { getProduct } from '../../products/read';
 import { useCartContext } from './cartContent';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { Helmet } from 'react-helmet';
 import Loader from '../loader';
 
@@ -9,22 +12,24 @@ function ProductPage() {
     const { productId } = useParams();
     const [product, setProduct] = useState(null);
     const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(true); 
+    const [loading, setLoading] = useState(true);
     const { updateCartItemCount } = useCartContext();
+    const [showShopMore, setShowShopMore] = useState(false);
+    const [addedToCart, setAddedToCart] = useState(false); 
 
     useEffect(() => {
         if (!productId) {
             setError('Product ID is missing');
-            setLoading(false); 
+            setLoading(false);
             return;
         }
 
         const fetchProduct = async () => {
             try {
-                const response = await getProduct(productId, setLoading); 
-                setProduct(response.data); 
+                const response = await getProduct(productId, setLoading);
+                setProduct(response.data);
             } catch (err) {
-                setError(err.message); 
+                setError(err.message);
             }
         };
 
@@ -45,10 +50,12 @@ function ProductPage() {
 
             localStorage.setItem('cart', JSON.stringify(existingCart));
             updateCartItemCount();
+            setAddedToCart(true); 
+            setShowShopMore(true); 
         }
     };
 
-    if (loading) return <Loader />; 
+    if (loading) return <Loader />;
     if (error) return <div>{error}</div>;
 
     const hasDiscount = product.price > product.discountedPrice;
@@ -88,10 +95,23 @@ function ProductPage() {
                     )}
                     <button 
                         onClick={handleAddToCart} 
-                        className="mt-4 bg-primary text-white font-bold py-1.5 px-3 rounded transition duration-300 hover:bg-secondary mx-auto block"
+                        className={`mt-4 text-white font-bold py-1.5 px-3 rounded transition duration-300 mx-auto block ${
+                            addedToCart ? 'bg-gray-400 cursor-not-allowed' : 'bg-primary hover:bg-secondary'
+                        }`}
+                        disabled={addedToCart} 
                     >
-                        Add to Cart
+                         {addedToCart ? <><FontAwesomeIcon icon={faCheck} /> Added to Cart</> : 'Add to Cart'}
                     </button>
+
+
+                    {showShopMore && (
+                        <Link 
+                            to="/" 
+                            className="block mt-4 text-primary font-semibold hover:underline text-center"
+                        >
+                        <FontAwesomeIcon icon={faArrowLeft} />  Shop More
+                        </Link>
+                    )}
                 </div>
             </div>
 

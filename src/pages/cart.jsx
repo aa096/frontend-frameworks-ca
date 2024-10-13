@@ -1,4 +1,4 @@
-import CartPage from "../components/templates/carTemplate";
+import { CartPage } from "../components/templates";
 import { Helmet } from "react-helmet";
 
 function Cart() {

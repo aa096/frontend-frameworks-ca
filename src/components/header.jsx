@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
@@ -7,7 +7,7 @@ import anycartLogo from "../../public/assets/anycart.svg"
 
 export default function Header() {
   const [isMenuOpen, setMenuOpen] = useState(false);
-  const { cartItemCount } = useCartContext(); // Use context
+  const { cartItemCount } = useCartContext(); 
 
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
