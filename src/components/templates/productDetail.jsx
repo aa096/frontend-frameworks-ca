@@ -111,11 +111,8 @@ function ProductPage() {
           <button
             onClick={handleAddToCart}
             className={`mt-4 text-white font-bold py-1.5 px-3 rounded transition duration-300 mx-auto block ${
-              addedToCart
-                ? "bg-gray-400 cursor-not-allowed"
-                : "bg-primary hover:bg-secondary"
+              addedToCart ? "bg-secondary" : "bg-primary hover:bg-secondary"
             }`}
-            disabled={addedToCart}
           >
             {addedToCart ? (
               <>

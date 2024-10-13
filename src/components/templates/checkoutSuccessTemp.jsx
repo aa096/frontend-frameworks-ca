@@ -2,6 +2,7 @@ import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { faBagShopping } from "@fortawesome/free-solid-svg-icons";
 
 export default function CheckoutSuccess() {
   const location = useLocation();
@@ -9,6 +10,9 @@ export default function CheckoutSuccess() {
 
   return (
     <div className="container mx-auto my-8 p-4 bg-white shadow-lg flex flex-col items-center">
+      <div className="text-[40px]">
+        <FontAwesomeIcon icon={faBagShopping} />
+      </div>
       <h1 className="text-[25px] font-bold mb-4 text-center">
         Thank You for Your Purchase!
       </h1>
