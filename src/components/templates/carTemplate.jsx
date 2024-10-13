@@ -2,13 +2,15 @@ import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useCartContext } from './cartContent';
+import { useNavigate } from 'react-router-dom'; 
 
 export default function CartPage() {
-  const { updateCartItemCount } = useCartContext(); // Access the context
+  const navigate = useNavigate(); 
+  const { updateCartItemCount } = useCartContext(); 
   const [cart, setCart] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalDiscount, setTotalDiscount] = useState(0);
-  const shippingPrice = 5.99; // Set a fixed shipping price (or make it dynamic)
+  const shippingPrice = 5.99; 
 
   const updateQuantity = (id, delta) => {
     const updatedCart = cart.map(item =>
@@ -17,14 +19,14 @@ export default function CartPage() {
     
     setCart(updatedCart);
     localStorage.setItem('cart', JSON.stringify(updatedCart));
-    updateCartItemCount(); // Call to update cart item count
+    updateCartItemCount(); 
   };
 
   const deleteItem = (id) => {
     const updatedCart = cart.filter(item => item.id !== id);
     setCart(updatedCart);
     localStorage.setItem('cart', JSON.stringify(updatedCart));
-    updateCartItemCount(); // Call to update cart item count
+    updateCartItemCount(); 
   };
 
   const calculateTotals = () => {
@@ -50,14 +52,20 @@ export default function CartPage() {
   useEffect(() => {
     const existingCart = JSON.parse(localStorage.getItem('cart')) || [];
     setCart(existingCart);
-    updateCartItemCount(); // Update count when the component mounts
+    updateCartItemCount(); 
   }, []);
 
   useEffect(() => {
     calculateTotals();
   }, [cart]);
 
-  const totalAmount = totalPrice + totalDiscount + shippingPrice; // Total includes shipping
+  const totalAmount = totalPrice + totalDiscount + shippingPrice; 
+
+  const handleCheckout = () => {
+    localStorage.removeItem('cart');
+    setCart([]);
+    navigate('/checkout-success', { state: { cartItems: cart } }); 
+  };
 
   if (cart.length === 0) {
     return <div className="text-center">Your cart is empty.</div>;
@@ -101,7 +109,6 @@ export default function CartPage() {
         </div>
       ))}
 
-      {/* Total Section */}
       <div className="mt-8">
         <div className="flex justify-between">
           <p className="text-[18px] font-bold">Former Price:</p>
@@ -120,6 +127,10 @@ export default function CartPage() {
           <p className="text-[20px] font-bold text-primary">$ {totalAmount.toFixed(2)}</p>
         </div>
       </div>
+
+      <button onClick={handleCheckout} className="bg-primary text-white px-4 py-2 rounded mt-4">
+        Checkout
+      </button>
     </div>
   );
 }
