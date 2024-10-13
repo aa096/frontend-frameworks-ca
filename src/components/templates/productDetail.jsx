@@ -3,25 +3,28 @@ import { useParams } from 'react-router-dom';
 import { getProduct } from '../../products/read';
 import { useCartContext } from './cartContent';
 import { Helmet } from 'react-helmet';
+import Loader from '../loader';
 
 function ProductPage() {
     const { productId } = useParams();
     const [product, setProduct] = useState(null);
     const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true); 
     const { updateCartItemCount } = useCartContext();
 
     useEffect(() => {
         if (!productId) {
             setError('Product ID is missing');
+            setLoading(false); 
             return;
         }
 
         const fetchProduct = async () => {
             try {
-                const response = await getProduct(productId);
-                setProduct(response.data);
+                const response = await getProduct(productId, setLoading); 
+                setProduct(response.data); 
             } catch (err) {
-                setError(err.message);
+                setError(err.message); 
             }
         };
 
@@ -45,8 +48,8 @@ function ProductPage() {
         }
     };
 
+    if (loading) return <Loader />; 
     if (error) return <div>{error}</div>;
-    if (!product) return <div>Loading...</div>;
 
     const hasDiscount = product.price > product.discountedPrice;
     const discountPercentage = hasDiscount

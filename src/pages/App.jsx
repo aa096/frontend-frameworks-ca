@@ -2,30 +2,28 @@ import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { getProducts } from "../products/read"; 
 import { ProductsTemplate } from "../components/templates";
+import { Loader } from "../components";
 
 function App() {
   const [items, setItems] = useState([]); 
   const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const fetchedProducts = await getProducts();
-        
-        setItems(fetchedProducts); 
-      } catch (error) {
-        console.error("Error fetching products in App:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchProducts();
+      const fetchProducts = async () => {
+          try {
+              const fetchedProducts = await getProducts();
+              setItems(fetchedProducts); 
+          } catch (error) {
+              console.error("Error fetching products in App:", error);
+          } finally {
+              setLoading(false);
+          }
+      };
+      fetchProducts();
   }, []);
-  
-
 
   if (loading) {
-    return <div>Loading...</div>; 
+      return <Loader />; 
   }
 
   return (
