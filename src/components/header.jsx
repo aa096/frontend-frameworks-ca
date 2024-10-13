@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { useCartContext } from "./templates/cartContent";
-import anycartLogo from "../assets/anycart.svg";
+import anycartLogo from "../assets/anycart.png";
 
 export default function Header() {
   const [isMenuOpen, setMenuOpen] = useState(false);
