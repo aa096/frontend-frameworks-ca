@@ -5,9 +5,6 @@ export default {
     "./src/**/*.{js,jsx}",
   ],
   theme: {
-    container: {
-      center: true,
-    },
     extend: {
       colors: {
         primary: 'var(--color-primary)',
